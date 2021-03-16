@@ -1,14 +1,13 @@
 <template>
   <div class="hello">
     <ul id="v-for-object">
-      <li v-for="(number, index) in 25" 
+      <li v-for="(number, index) in numbers" 
         v-bind:key="index"
         v-clipboard:copy="number"
         v-clipboard:success="onCopy"
         v-clipboard:error="onError"
       >
-        <span v-if="showNumber" v-text="number" v-bind:key="index"></span>
-        <span v-else>icon</span>
+        <span v-text="number" v-bind:key="index"></span>
       </li>
     </ul>
   </div>
@@ -21,17 +20,19 @@ export default {
   name: 'HelloWorld',
   data: function () {
     return {
-      showNumber: true,
+      numbers: [1,2,3,4,5,6,7,8,9,10],
+      selectedNumber: null,
+      tempVal: null,
     }
   },
   methods: {
     onCopy: function (e) {
       console.log('You just copied: ' + e.text)
-      this.showNumber = false
-      console.log(this.selectItem)
+      this.tempVal = this.numbers[e.text-1]
+      this.$set(this.numbers, e.text-1, '📋')
       _.delay(() => {
-        this.showNumber = true
-      }, 2000);
+        this.$set(this.numbers, e.text-1, this.tempVal)
+      }, 2000)
     },
     onError: function () {
       console.log('Failed to copy texts')
