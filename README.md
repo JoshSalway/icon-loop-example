@@ -1,4 +1,6 @@
 # icon-loop-example
+Can if statements go inside for loop statements.
+https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential
 
 ## Project setup
 ```
